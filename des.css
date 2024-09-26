@@ -1,0 +1,60 @@
+  .love-button {
+      position: relative;
+      width: 60px;   /* Lebar tombol diperkecil */
+      height: 54px;  /* Tinggi tombol diperkecil */
+      background-color: red;
+      transform: rotate(-45deg);
+      border-radius: 50% 50% 0 0;
+      border: none;
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.2s ease;
+    }
+
+    .love-button::before,
+    .love-button::after {
+      content: "";
+      position: absolute;
+      width: 60px;   /* Ukuran lingkaran disesuaikan */
+      height: 60px;
+      background-color: red;
+      border-radius: 50%;
+    }
+
+    .love-button::before {
+      top: -30px;   /* Posisi disesuaikan */
+      left: 0;
+    }
+
+    .love-button::after {
+      left: 30px;  /* Posisi disesuaikan */
+      top: 0;
+    }
+
+    /* Efek saat ditekan */
+    .love-button:active {
+      transform: rotate(-45deg) scale(0.9);
+    }
+
+    /* Pecahan animasi */
+    .love-button .particle {
+      position: absolute;
+      width: 6px;   /* Ukuran partikel diperkecil */
+      height: 6px;
+      background-color: red;
+      border-radius: 50%;
+      opacity: 0;
+      pointer-events: none;
+      animation: particle-animation 0.6s ease-out forwards;
+    }
+
+    @keyframes particle-animation {
+      0% {
+        opacity: 1;
+        transform: translate(0, 0) scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(0.5);
+      }
+    }

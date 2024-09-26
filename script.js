@@ -1,5 +1,3 @@
-const loveButton = document.querySelector('.love-button');
-
-loveButton.addEventListener('click', () => {
-  loveButton.classList.add('broken');
-});
+function pindahHalaman(url) {
+  window.location.href = url;
+}

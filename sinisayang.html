@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Geserr Geserr yaa sayangg</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    .container {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .slideshow-container {
+      width: 80%; /* Lebar 80% layar */
+      max-width: 1000px;
+      height: 450px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      /* slide-wrapper akan memegang semua slides di dalam */
+    }
+
+    .slide {
+      min-width: 300px; /* Lebar tiap slide */
+      height: 450px;
+      background-size: cover;
+      background-position: center;
+      margin-right: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .slide:last-child {
+      margin-right: 0;
+    }
+
+    .slide-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      background-image: url('05.png');
+      color: navy;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .slide-button:hover {
+      background-color: white;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="slideshow-container" id="slideshow">
+      <div class="slides">
+        <div class="slide" style="background-image: url('01.png');"></div>
+        <div class="slide" style="background-image: url('02.png');"></div>
+        <div class="slide" style="background-image: url('03.png');"></div>
+        <div class="slide" style="background-image: url('04.png');"></div>
+        <div class="slide" style="background-image: url('06.png');"></div>
+        <div class="slide" style="background-image: url('07.png');"></div>
+        <div class="slide" style="background-image: url('08.png');"></div>
+        <div class="slide" style="background-image: url('09.png');"></div>
+        <div class="slide" style="background-image: url('10.png');"></div>
+        <div class="slide slide-button" onclick="goToNextPage()"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelector('.slides');
+    const slideCount = document.querySelectorAll('.slide').length;
+    const slideWidth = 310; // Lebar slide + margin
+
+    // Fungsi untuk mengganti slide
+    function changeSlide(direction) {
+      currentSlide = (currentSlide + direction + slideCount) % slideCount;
+      slides.style.transform = `translateX(${-currentSlide * slideWidth}px)`;
+    }
+
+    // Fungsi untuk pindah ke halaman berikutnya saat slide terakhir ditekan
+    function goToNextPage() {
+      window.location.href = "love.html"; // Ganti dengan URL halaman yang Anda inginkan
+    }
+
+    // Variabel untuk swipe
+    let startX, endX;
+
+    // Deteksi gesture swipe di perangkat layar sentuh
+    slides.addEventListener('touchstart', function(e) {
+      startX = e.touches[0].clientX;
+    });
+
+    slides.addEventListener('touchmove', function(e) {
+      endX = e.touches[0].clientX;
+    });
+
+    slides.addEventListener('touchend', function() {
+      if (startX > endX + 50) {
+        changeSlide(1); // Geser ke kanan
+      } else if (startX < endX - 50) {
+        changeSlide(-1); // Geser ke kiri
+      }
+    });
+
+    // Deteksi gesture swipe di perangkat desktop (drag dengan mouse)
+    slides.addEventListener('mousedown', function(e) {
+      startX = e.clientX;
+    });
+
+    slides.addEventListener('mousemove', function(e) {
+      if (e.buttons === 1) { // Tekan dan geser
+        endX = e.clientX;
+      }
+    });
+
+    slides.addEventListener('mouseup', function() {
+      if (startX > endX + 50) {
+        changeSlide(1); // Geser ke kanan
+      } else if (startX < endX - 50) {
+        changeSlide(-1); // Geser ke kiri
+      }
+    });
+
+  </script>
+
+</body>
+</html>
